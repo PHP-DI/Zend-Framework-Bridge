@@ -1,33 +1,35 @@
 {
-    "name": "php-di/zf2-bridge",
+    "name": "php-di/zf3-bridge",
     "type": "library",
     "description": "Integrates PHP-DI to Zend Framework 2",
-    "homepage": "https://github.com/PHP-DI/ZF2-Bridge",
+    "homepage": "https://github.com/PHP-DI/ZF3-Bridge",
     "license": "MIT",
     "require": {
-        "php": ">=5.5",
-        "php-di/php-di": "~5.0",
-        "acclimate/container": "~1.0",
-        "doctrine/annotations": "~1.0",
-        "doctrine/cache": "~1.0"
+        "php": ">=5.6",
+        "php-di/php-di": "^5.0",
+        "acclimate/container": "^1.0",
+        "doctrine/annotations": "^1.0",
+        "doctrine/cache": "^1.0",
+        "roave/security-advisories": "dev-master"
     },
 
     "require-dev": {
-        "zendframework/zendframework": "~2.5",
-        "squizlabs/php_codesniffer": "~2.0",
-        "phpmd/phpmd" : "~2.0",
-        "phpunit/phpunit": "~4.8"
+        "zendframework/zendframework": "^3.0",
+        "squizlabs/php_codesniffer": "^2.6",
+        "phpmd/phpmd" : "^2.5",
+        "phpunit/phpunit": "^5.0"
     },
 
     "autoload": {
         "psr-4": {
-            "DI\\ZendFramework2\\": "src/DI/ZendFramework2"
+            "DI\\ZendFramework3\\": "src/DI/ZendFramework3"
         }
     },
 
     "autoload-dev": {
       "psr-4": {
-        "Test\\DI\\ZendFramework2\\": "tests/DI/ZendFramework2"
+        "Test\\DI\\ZendFramework3\\": "tests/DI/ZendFramework3",
+        "Application\\": "quickstart/module/Application/src"
       }
     }
 }

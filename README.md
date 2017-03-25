@@ -1,12 +1,13 @@
-# PHP-DI integration with Zend Framework 2
+# PHP-DI integration with Zend Framework 3
 
-[![Build Status](https://travis-ci.org/PHP-DI/ZF2-Bridge.svg)](https://travis-ci.org/PHP-DI/ZF2-Bridge)
+[![Build Status](https://travis-ci.org/PHP-DI/ZF3-Bridge.svg)](https://travis-ci.org/PHP-DI/ZF3-Bridge)
 
-This library provides integration for PHP-DI with Zend Framework 2.
+This library provides integration for PHP-DI with Zend Framework 3.
 
 [PHP-DI](http://php-di.org/) is a Dependency Injection Container for PHP.
 
 If you are looking for Zend Framework 1 integration, head over [here](https://github.com/php-di/PHP-DI-ZF1).
+If you are looking for Zend Framework 2 integration, head over [here](https://github.com/php-di/PHP-DI-ZF2).
 
 ## Use
 
@@ -16,25 +17,26 @@ Require the libraries with Composer:
 {
     "require": {
         "php-di/php-di": "*",
-        "php-di/zf2-bridge": "*"
+        "php-di/zf3-bridge": "*"
     }
 }
 ```
 
-To use PHP-DI in your ZF2 application, you need to edit `application_root/config/application.config.php`:
+To use PHP-DI in your ZF3 application, you need to edit `application_root/config/application.config.php`:
 
 ```php
     // ...
     'modules' => [
-        ...
-        'DI\ZendFramework2',
+        'DI\ZendFramework3',
+        'Zend\Router',
+        'Zend\Mvc\Console',
         ...
     ],
 
     'service_manager' => [
         // ...
         'factories' => [
-            'DI\Container' => 'DI\ZendFramework2\Service\DIContainerFactory',
+            'DI\Container' => DI\ZendFramewor3\Service\DIContainerFactory::class,
         ],
     ],
 ```
@@ -61,7 +63,7 @@ or config/autoload/local.php.
 
 ```php
 return [
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         ...
     ]
 ];
@@ -71,7 +73,7 @@ return [
 
 ```php
 return [
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         'definitionsFile' => realpath(__DIR__ . '/../my.custom.def.config.php'),
     ]
 ];
@@ -81,7 +83,7 @@ return [
 
 ```php
 return [
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         'useAnntotations' => true,
     ]
 ];
@@ -91,7 +93,7 @@ return [
 
 ```php
 return [
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         'cache' => [
             'adapter' => 'filesystem',
             'namespace' => 'your_di_cache_key',
@@ -109,7 +111,7 @@ when clearing the php-di definitions cache.
 
 ```php
 return [
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         'cache' => [
             'namespace' => 'your_di_cache_key',
             'adapter' => 'redis',
@@ -127,7 +129,7 @@ If you're using Memcached, you should have only one project per memcached instan
 
 ```php
 return [
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         'cache' => [
             'adapter' => 'memcached',
             'host' => 'localhost', // default is localhost
@@ -146,3 +148,13 @@ To clear the definition cache, run the following command from the project root:
 ```
 php public/index.php php-di-clear-cache
 ```
+
+## Run sample application
+
+Run `composer install --dev`
+
+After that, open terminal and go to the `quickstart` folder and run `php -S 0.0.0.0:8080 -t public public/index.php`
+
+Open a browser and go to this address: `http://localhost:8080/hello`
+
+You should see a page with a greeting coming from the GreetingController, which is being resolved by the PHP-DI configuration.

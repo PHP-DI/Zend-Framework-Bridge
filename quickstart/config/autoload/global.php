@@ -2,7 +2,7 @@
 /**
  * Global Configuration Override
  *
- * You can use this file for overridding configuration values from modules, etc.
+ * You can use this file for overriding configuration values from modules, etc.
  * You would place values in here that are agnostic to the environment and not
  * sensitive to security.
  *
@@ -12,12 +12,12 @@
  */
 
 return [
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         'definitionsFile' => realpath(__DIR__ . '/../php-di.config.php'),
         'useAnntotations' => true,
         'cache' => [
             'adapter' => 'filesystem',
-            'namespace' => 'quickstart',
+            'namespace' => 'quickstartxx',
         ],
     ]
 ];

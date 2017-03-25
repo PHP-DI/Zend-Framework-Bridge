@@ -8,26 +8,8 @@
  *
  * @NOTE: This file is ignored from Git by default with the .gitignore included
  * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
- * credentials from accidentally being comitted into version control.
+ * credentials from accidentally being committed into version control.
  */
 
 return [
-    'phpdi-zf2' => [
-        'definitionsFile' => realpath(__DIR__ . '/../php-di.config.php'),
-        'useAnntotations' => true,
-
-        // if no cache is needed, omit the cache key
-        'cache' => [
-            'namespace' => 'quickstart',
-
-            // file adapter
-            'adapter' => 'filesystem',
-
-            // redis adapter
-            'adapter' => 'redis',
-            'host' => 'localhost',
-            'port' => 6379,
-            'database' => 1, // default is the same as phpredis default
-        ],
-    ]
 ];

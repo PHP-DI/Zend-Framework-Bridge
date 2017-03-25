@@ -6,32 +6,26 @@
  * @copyright Matthieu Napoli (http://mnapoli.fr/)
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
-namespace DI\ZendFramework2;
-
-// compatibility with zend > 2.5
-$controllerType = 'ControllerLoader';
-if (class_exists('\Zend\Version\Version')) {
-    $version = new \Zend\Version\Version();
-    if ($version::compareVersion('2.5.0') <= 0) {
-        $controllerType = 'ControllerManager';
-    }
-}
+namespace DI\ZendFramework3;
 
 return [
     'controllers' => [
-        'invokables' => [
-            'DI\\ZendFramework2\\Controller\\Console' => 'DI\\ZendFramework2\\Controller\\ConsoleController',
-        ],
+//        'invokables' => [
+//            Controller\ConsoleController::class => Controller\ConsoleController::class,
+//        ],
+        'factories' => [
+            Controller\ConsoleController::class => Service\ConsoleControllerFactory::class,
+        ]
     ],
 
     'service_manager' => [
-        'abstract_factories' => array(
-            __NAMESPACE__ . '\\Service\\PHPDIAbstractFactory' => __NAMESPACE__ . '\\Service\\PHPDIAbstractFactory',
-        ),
+        'abstract_factories' => [
+            Service\PHPDIAbstractFactory::class => Service\PHPDIAbstractFactory::class,
+        ],
 
         'factories' => [
-            $controllerType => __NAMESPACE__ . '\\Service\\ControllerLoaderFactory',
-            'DiCache' => __NAMESPACE__ . '\\Service\\CacheFactory',
+            'ControllerManager' => Service\ControllerManagerFactory::class,
+            'DiCache' => Service\CacheFactory::class,
         ],
     ],
 
@@ -42,7 +36,7 @@ return [
                     'options' => [
                         'route'    => 'php-di-clear-cache',
                         'defaults' => [
-                            'controller' => __NAMESPACE__ . '\Controller\Console',
+                            'controller' => Controller\ConsoleController::class,
                             'action'     => 'clearCache',
                             '__NAMESPACE__' => __NAMESPACE__,
                         ]
@@ -52,7 +46,7 @@ return [
         ],
     ],
 
-    'phpdi-zf2' => [
+    'phpdi-zf3' => [
         'useAnntotations' => false,
     ],
 ];

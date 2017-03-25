@@ -11,7 +11,7 @@ namespace Test\DI\ZendFramework2\Service;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use DI\ZendFramework2\Service\PHPDIAbstractFactory;
+use DI\ZendFramework3\Service\PHPDIAbstractFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 
@@ -34,14 +34,15 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $this->phpdi = ContainerBuilder::buildDevContainer();
 
-        $config = array(
-            'modules' => array(
-                'DI\ZendFramework2',
-            ),
-            'module_listener_options' => array(),
-        );
+        $config = [
+            'modules' => [
+                'Zend\Router',
+                'DI\ZendFramework3',
+            ],
+            'module_listener_options' => [],
+        ];
 
-        $this->serviceManager = new ServiceManager(new ServiceManagerConfig());
+        $this->serviceManager = new ServiceManager((new ServiceManagerConfig())->toArray());
         $this->serviceManager->setService(PHPDIAbstractFactory::CONTAINER_NAME, $this->phpdi);
         $this->serviceManager->setService('ApplicationConfig', $config);
 
