@@ -7,17 +7,18 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
 
-namespace Test\DI\ZendFramework3\Service;
+namespace Test\DI\ZendFramework;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use DI\ZendFramework3\Service\PHPDIAbstractFactory;
+use DI\ZendFramework\Service\PHPDIAbstractFactory;
+use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 
 /**
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class PHPDIAbstractFactoryTest extends \PHPUnit_Framework_TestCase
+class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Container
@@ -29,34 +30,48 @@ class PHPDIAbstractFactoryTest extends \PHPUnit_Framework_TestCase
      */
     private $serviceManager;
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function setUp()
     {
         $this->phpdi = ContainerBuilder::buildDevContainer();
 
-        $this->serviceManager = new ServiceManager();
+        $config = [
+            'modules' => [
+                'Zend\Router',
+                'DI\ZendFramework',
+            ],
+            'module_listener_options' => [],
+        ];
+
+        $this->serviceManager = new ServiceManager((new ServiceManagerConfig())->toArray());
         $this->serviceManager->setService(PHPDIAbstractFactory::CONTAINER_NAME, $this->phpdi);
-        $this->serviceManager->addAbstractFactory(new PHPDIAbstractFactory());
+        $this->serviceManager->setService('ApplicationConfig', $config);
+
+        $moduleManager = $this->serviceManager->get('ModuleManager');
+        $moduleManager->loadModules();
     }
 
     public function testGetInServiceManager()
     {
         $this->serviceManager->setService('phpdifoo', 'bar');
 
-        self::assertTrue($this->serviceManager->has('phpdifoo'));
-        self::assertEquals('bar', $this->serviceManager->get('phpdifoo'));
+        $this->assertTrue($this->serviceManager->has('phpdifoo'));
+        $this->assertEquals('bar', $this->serviceManager->get('phpdifoo'));
     }
 
     public function testGetInPHPDI()
     {
         $this->phpdi->set('phpdifoo', 'bar');
 
-        self::assertTrue($this->serviceManager->has('phpdifoo'));
-        self::assertEquals('bar', $this->serviceManager->get('phpdifoo'));
+        $this->assertTrue($this->serviceManager->has('phpdifoo'));
+        $this->assertEquals('bar', $this->serviceManager->get('phpdifoo'));
     }
 
     public function testHasUndefinedEntry()
     {
-        self::assertFalse($this->serviceManager->has('phpdifoo'));
+        $this->assertFalse($this->serviceManager->has('phpdifoo'));
     }
 
     /**

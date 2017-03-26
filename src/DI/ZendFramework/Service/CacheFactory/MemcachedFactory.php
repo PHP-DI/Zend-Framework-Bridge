@@ -4,7 +4,7 @@
  * @author Martin Fris <rasta@lj.sk>
  */
 
-namespace DI\ZendFramework3\Service\CacheFactory;
+namespace DI\ZendFramework\Service\CacheFactory;
 
 use Doctrine\Common\Cache\MemcachedCache;
 use Memcached;
@@ -12,7 +12,7 @@ use Memcached;
 /**
  * Class RedisFactory
  * @author mfris
- * @package DI\ZendFramework3\Service\CacheFactory
+ * @package DI\ZendFramework\Service\CacheFactory
  */
 final class MemcachedFactory implements CacheFactoryInterface
 {

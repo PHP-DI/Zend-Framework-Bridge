@@ -1,8 +1,8 @@
 {
-    "name": "php-di/zf3-bridge",
+    "name": "php-di/zend-framework-bridge",
     "type": "library",
-    "description": "Integrates PHP-DI to Zend Framework 2",
-    "homepage": "https://github.com/PHP-DI/ZF3-Bridge",
+    "description": "Integrates PHP-DI to Zend Framework",
+    "homepage": "https://github.com/PHP-DI/Zend-Framework-Bridge",
     "license": "MIT",
     "require": {
         "php": ">=5.6",
@@ -28,13 +28,13 @@
 
     "autoload": {
         "psr-4": {
-            "DI\\ZendFramework3\\": "src/DI/ZendFramework3"
+            "DI\\ZendFramework\\": "src/DI/ZendFramework/"
         }
     },
 
     "autoload-dev": {
       "psr-4": {
-        "Test\\DI\\ZendFramework3\\": "tests/DI/ZendFramework3",
+        "Test\\DI\\ZendFramework\\": "tests/DI/ZendFramework",
         "Application\\": "quickstart/module/Application/src"
       }
     }

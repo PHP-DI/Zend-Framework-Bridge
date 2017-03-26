@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
 
-namespace DI\ZendFramework3\Service;
+namespace DI\ZendFramework\Service;
 
 use Interop\Container\ContainerInterface;
 use Zend\Mvc\Controller\AbstractController;

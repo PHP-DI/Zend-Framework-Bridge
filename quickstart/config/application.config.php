@@ -67,7 +67,7 @@ return [
     'service_manager' => [
         // ...
         'factories' => [
-            'DI\Container' => DI\ZendFramework3\Service\DIContainerFactory::class,
+            'DI\Container' => DI\ZendFramework\Service\DIContainerFactory::class,
         ],
     ],
 ];

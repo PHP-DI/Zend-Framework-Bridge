@@ -4,14 +4,14 @@
  * @author Martin Fris <rasta@lj.sk>
  */
 
-namespace DI\ZendFramework3\Service\CacheFactory;
+namespace DI\ZendFramework\Service\CacheFactory;
 
 use Doctrine\Common\Cache\FilesystemCache;
 
 /**
  * Class FileSystemFactory
  * @author mfris
- * @package DI\ZendFramework3\Service\CacheFactory
+ * @package DI\ZendFramework\Service\CacheFactory
  */
 final class FileSystemFactory implements CacheFactoryInterface
 {

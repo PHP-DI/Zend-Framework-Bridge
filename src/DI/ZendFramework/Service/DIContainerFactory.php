@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
 
-namespace DI\ZendFramework3\Service;
+namespace DI\ZendFramework\Service;
 
 use Acclimate\Container\ContainerAcclimator;
 use Acclimate\Container\Exception\InvalidAdapterException;
@@ -31,7 +31,6 @@ use RuntimeException;
  */
 final class DIContainerFactory implements FactoryInterface
 {
-
     use ConfigTrait;
 
     /**

@@ -11,7 +11,7 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
-    'DI\ZendFramework3',
+    'DI\ZendFramework',
     'Zend\Router',
     'Zend\Validator',
     'Zend\Mvc\Console',

@@ -12,7 +12,7 @@
  */
 
 return [
-    'phpdi-zf3' => [
+    'phpdi-zf' => [
         'definitionsFile' => realpath(__DIR__ . '/../php-di.config.php'),
         'useAnntotations' => true,
         'cache' => [

@@ -5,7 +5,7 @@
  * @license    Internal use only
  */
 
-namespace DI\ZendFramework3\Service;
+namespace DI\ZendFramework\Service;
 
 use Interop\Container\ContainerInterface;
 use Psr\Container\ContainerExceptionInterface;
@@ -14,7 +14,7 @@ use Psr\Container\NotFoundExceptionInterface;
 /**
  * simple trait for getting php di config data from zf2 config array
  * @author  mfris
- * @package DI\ZendFramework3\Service
+ * @package DI\ZendFramework\Service
  */
 trait ConfigTrait
 {
@@ -32,8 +32,8 @@ trait ConfigTrait
         $zendConfig = $container->get('config');
         $config = [];
 
-        if (isset($zendConfig['phpdi-zf3'])) {
-            $config = $zendConfig['phpdi-zf3'];
+        if (isset($zendConfig['phpdi-zf'])) {
+            $config = $zendConfig['phpdi-zf'];
         }
 
         return $config;

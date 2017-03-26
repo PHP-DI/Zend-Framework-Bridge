@@ -3,9 +3,9 @@
  * @author     mfris
  */
 
-namespace DI\ZendFramework3\Service\CacheFactory;
+namespace DI\ZendFramework\Service\CacheFactory;
 
-use DI\ZendFramework3\Service\ConfigTrait;
+use DI\ZendFramework\Service\ConfigTrait;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\CacheProvider;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -20,7 +20,7 @@ use Psr\Container\NotFoundExceptionInterface;
  * Factory for php di definitions cache
  *
  * @author  mfris
- * @package \DI\ZendFramework3\Service\Cache
+ * @package \DI\ZendFramework\Service\Cache
  */
 class CacheFactory implements FactoryInterface
 {

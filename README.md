@@ -1,12 +1,11 @@
-# PHP-DI integration with Zend Framework 3
+# PHP-DI integration with Zend Framework
 
-[![Build Status](https://travis-ci.org/PHP-DI/ZF3-Bridge.svg)](https://travis-ci.org/PHP-DI/ZF3-Bridge)
+[![Build Status](https://travis-ci.org/PHP-DI/ZF-Bridge.svg)](https://travis-ci.org/PHP-DI/ZF-Bridge)
 
-This library provides integration for PHP-DI with Zend Framework 3.
+This library provides integration for PHP-DI with Zend Framework.
 
 [PHP-DI](http://php-di.org/) is a Dependency Injection Container for PHP.
 
-If you are looking for Zend Framework 1 integration, head over [here](https://github.com/php-di/PHP-DI-ZF1).
 If you are looking for Zend Framework 2 integration, head over [here](https://github.com/php-di/PHP-DI-ZF2).
 
 ## Use
@@ -17,17 +16,17 @@ Require the libraries with Composer:
 {
     "require": {
         "php-di/php-di": "*",
-        "php-di/zf3-bridge": "*"
+        "php-di/zf-bridge": "*"
     }
 }
 ```
 
-To use PHP-DI in your ZF3 application, you need to edit `application_root/config/application.config.php`:
+To use PHP-DI in your Zend Framework application, you need to edit `application_root/config/application.config.php`:
 
 ```php
     // ...
     'modules' => [
-        'DI\ZendFramework3',
+        'DI\ZendFramework',
         'Zend\Router',
         'Zend\Mvc\Console',
         ...
@@ -36,7 +35,7 @@ To use PHP-DI in your ZF3 application, you need to edit `application_root/config
     'service_manager' => [
         // ...
         'factories' => [
-            'DI\Container' => DI\ZendFramewor3\Service\DIContainerFactory::class,
+            'DI\Container' => DI\ZendFramewor\Service\DIContainerFactory::class,
         ],
     ],
 ```
@@ -63,7 +62,7 @@ or config/autoload/local.php.
 
 ```php
 return [
-    'phpdi-zf3' => [
+    'phpdi-zf' => [
         ...
     ]
 ];
@@ -73,7 +72,7 @@ return [
 
 ```php
 return [
-    'phpdi-zf3' => [
+    'phpdi-zf' => [
         'definitionsFile' => realpath(__DIR__ . '/../my.custom.def.config.php'),
     ]
 ];
@@ -83,7 +82,7 @@ return [
 
 ```php
 return [
-    'phpdi-zf3' => [
+    'phpdi-zf' => [
         'useAnntotations' => true,
     ]
 ];
@@ -93,7 +92,7 @@ return [
 
 ```php
 return [
-    'phpdi-zf3' => [
+    'phpdi-zf' => [
         'cache' => [
             'adapter' => 'filesystem',
             'namespace' => 'your_di_cache_key',
@@ -111,7 +110,7 @@ when clearing the php-di definitions cache.
 
 ```php
 return [
-    'phpdi-zf3' => [
+    'phpdi-zf' => [
         'cache' => [
             'namespace' => 'your_di_cache_key',
             'adapter' => 'redis',
@@ -129,7 +128,7 @@ If you're using Memcached, you should have only one project per memcached instan
 
 ```php
 return [
-    'phpdi-zf3' => [
+    'phpdi-zf' => [
         'cache' => [
             'adapter' => 'memcached',
             'host' => 'localhost', // default is localhost

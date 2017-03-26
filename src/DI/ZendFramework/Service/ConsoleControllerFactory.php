@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
 
-namespace DI\ZendFramework3\Service;
+namespace DI\ZendFramework\Service;
 
-use DI\ZendFramework3\Controller\ConsoleController;
+use DI\ZendFramework\Controller\ConsoleController;
 use Doctrine\Common\Cache\Cache;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;

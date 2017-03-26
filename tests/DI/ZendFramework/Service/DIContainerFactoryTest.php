@@ -3,14 +3,14 @@
  * @author  mfris
  */
 
-namespace Test\DI\ZendFramework3\Service;
+namespace Test\DI\ZendFramework\Service;
 
 use DI\Container;
-use DI\ZendFramework3\Service\CacheFactory\CacheFactory;
-use DI\ZendFramework3\Service\CacheFactory\ConfigException;
-use DI\ZendFramework3\Service\DIContainerFactory;
+use DI\ZendFramework\Service\CacheFactory\CacheFactory;
+use DI\ZendFramework\Service\CacheFactory\ConfigException;
+use DI\ZendFramework\Service\DIContainerFactory;
 use Doctrine\Common\Cache\ArrayCache;
-use Test\DI\ZendFramework3\Helper\Config;
+use Test\DI\ZendFramework\Helper\Config;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\ServiceManager;
 use RuntimeException;
@@ -18,7 +18,7 @@ use RuntimeException;
 /**
  * Class DIContainerFactoryTest
  * @author mfris
- * @package Test\DI\ZendFramework3\Service
+ * @package Test\DI\ZendFramework\Service
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class DIContainerFactoryTest extends \PHPUnit_Framework_TestCase
@@ -91,10 +91,10 @@ class DIContainerFactoryTest extends \PHPUnit_Framework_TestCase
         /* @var $config array */
         $config = $serviceManager->get('config');
 
-        if (isset($config['phpdi-zf3'], $config['phpdi-zf3']['cache'])) {
-            if (!isset($config['phpdi-zf3']['cache']['adapter'])) {
+        if (isset($config['phpdi-zf'], $config['phpdi-zf']['cache'])) {
+            if (!isset($config['phpdi-zf']['cache']['adapter'])) {
                 throw ConfigException::newCacheAdapterMissingException();
-            } elseif ($config['phpdi-zf3']['cache']['adapter'] === 'unsupported') {
+            } elseif ($config['phpdi-zf']['cache']['adapter'] === 'unsupported') {
                 throw ConfigException::newUnsupportedCacheAdapterException('unsupported');
             }
 
