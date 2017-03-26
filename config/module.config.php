@@ -8,30 +8,21 @@
  */
 namespace DI\ZendFramework;
 
-// compatibility with zend > 2.5
-$controllerType = 'ControllerLoader';
-if (class_exists('\Zend\Version\Version')) {
-    $version = new \Zend\Version\Version();
-    if ($version::compareVersion('2.5.0') <= 0) {
-        $controllerType = 'ControllerManager';
-    }
-}
-
 return [
     'controllers' => [
-        'invokables' => [
-            'DI\\ZendFramework\\Controller\\Console' => 'DI\\ZendFramework\\Controller\\ConsoleController',
-        ],
+        'factories' => [
+            Controller\ConsoleController::class => Service\ConsoleControllerFactory::class,
+        ]
     ],
 
     'service_manager' => [
-        'abstract_factories' => array(
-            __NAMESPACE__ . '\\Service\\PHPDIAbstractFactory' => __NAMESPACE__ . '\\Service\\PHPDIAbstractFactory',
-        ),
+        'abstract_factories' => [
+            Service\PHPDIAbstractFactory::class => Service\PHPDIAbstractFactory::class,
+        ],
 
         'factories' => [
-            $controllerType => __NAMESPACE__ . '\\Service\\ControllerLoaderFactory',
-            'DiCache' => __NAMESPACE__ . '\\Service\\CacheFactory',
+            'ControllerManager' => Service\ControllerManagerFactory::class,
+            'DiCache' => Service\CacheFactory\CacheFactory::class,
         ],
     ],
 
@@ -42,7 +33,7 @@ return [
                     'options' => [
                         'route'    => 'php-di-clear-cache',
                         'defaults' => [
-                            'controller' => __NAMESPACE__ . '\Controller\Console',
+                            'controller' => Controller\ConsoleController::class,
                             'action'     => 'clearCache',
                             '__NAMESPACE__' => __NAMESPACE__,
                         ]

@@ -14,7 +14,7 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 
 /**
- * Module that provides PHP-DI integration with ZF
+ * Module that provides PHP-DI integration with ZF2
  *
  * @author Marco Pivetta <ocramius@gmail.com>
  */

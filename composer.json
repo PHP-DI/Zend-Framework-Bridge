@@ -6,17 +6,24 @@
     "license": "MIT",
     "require": {
         "php": ">=7.0",
-        "php-di/php-di": "~5.0",
-        "acclimate/container": "~1.0",
-        "doctrine/annotations": "~1.0",
-        "doctrine/cache": "~1.0"
+        "php-di/php-di": "^5.0",
+        "acclimate/container": "^1.0",
+        "doctrine/annotations": "^1.0",
+        "doctrine/cache": "^1.0",
+        "roave/security-advisories": "dev-master"
     },
 
     "require-dev": {
-        "zendframework/zendframework": "~2.5",
-        "squizlabs/php_codesniffer": "~2.0",
-        "phpmd/phpmd" : "~2.0",
-        "phpunit/phpunit": "~4.8"
+        "zendframework/zendframework": "^3.0",
+        "squizlabs/php_codesniffer": "^2.6",
+        "phpmd/phpmd" : "^2.5",
+        "phpunit/phpunit": "^5.0",
+        "phpro/grumphp": "^0.11.2",
+        "nikic/php-parser": "^3.0",
+        "sebastian/phpcpd": "^3.0",
+        "friendsofphp/php-cs-fixer": "^2.1",
+        "jakub-onderka/php-parallel-lint": "^0.9.2",
+        "sensiolabs/security-checker": "^4.0"
     },
 
     "autoload": {
@@ -27,7 +34,8 @@
 
     "autoload-dev": {
       "psr-4": {
-        "Test\\DI\\ZendFramework\\": "tests/"
+        "Test\\DI\\ZendFramework\\": "tests/DI/ZendFramework",
+        "Application\\": "quickstart/module/Application/src"
       }
     }
 }

@@ -5,6 +5,7 @@
 
 namespace DI\ZendFramework\Controller;
 
+use Doctrine\Common\Cache\Cache;
 use Zend\Mvc\Controller\AbstractActionController;
 use Doctrine\Common\Cache\FlushableCache;
 
@@ -14,19 +15,30 @@ use Doctrine\Common\Cache\FlushableCache;
  * @author mfris
  * @package \DI\ZendFramework\Controller
  */
-class ConsoleController extends AbstractActionController
+final class ConsoleController extends AbstractActionController
 {
+
+    /**
+     * @var Cache
+     */
+    private $cache;
+
+    /**
+     * ConsoleController constructor.
+     * @param Cache $cache
+     */
+    public function __construct(Cache $cache)
+    {
+        $this->cache = $cache;
+    }
 
     /**
      * flushes php di definitions cache
      */
     public function clearCacheAction()
     {
-        /* @var $cache FlushableCache */
-        $cache = $this->serviceLocator->get('DiCache');
-
-        if ($cache instanceof FlushableCache) {
-            $cache->flushAll();
+        if ($this->cache instanceof FlushableCache) {
+            $this->cache->flushAll();
         }
 
         echo "PHP DI definitions cache was cleared." . PHP_EOL . PHP_EOL;

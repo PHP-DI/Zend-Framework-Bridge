@@ -16,7 +16,7 @@ Require the libraries with Composer:
 {
     "require": {
         "php-di/php-di": "*",
-        "php-di/zf-bridge": "*"
+        "php-di/zend-framework-bridge": "*"
     }
 }
 ```
@@ -26,15 +26,16 @@ To use PHP-DI in your Zend Framework application, you need to edit `application_
 ```php
     // ...
     'modules' => [
-        ...
         'DI\ZendFramework',
+        'Zend\Router',
+        'Zend\Mvc\Console',
         ...
     ],
 
     'service_manager' => [
         // ...
         'factories' => [
-            'DI\Container' => 'DI\ZendFramework\Service\DIContainerFactory',
+            'DI\Container' => DI\ZendFramewor\Service\DIContainerFactory::class,
         ],
     ],
 ```
@@ -146,3 +147,13 @@ To clear the definition cache, run the following command from the project root:
 ```
 php public/index.php php-di-clear-cache
 ```
+
+## Run sample application
+
+Run `composer install --dev`
+
+After that, open terminal and go to the `quickstart` folder and run `php -S 0.0.0.0:8080 -t public public/index.php`
+
+Open a browser and go to this address: `http://localhost:8080/hello`
+
+You should see a page with a greeting coming from the GreetingController, which is being resolved by the PHP-DI configuration.

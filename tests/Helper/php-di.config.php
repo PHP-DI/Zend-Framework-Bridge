@@ -1,6 +1,0 @@
-<?php
-/**
- * @author  mfris
- */
-
-return [];

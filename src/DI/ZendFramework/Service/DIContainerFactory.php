@@ -10,11 +10,18 @@
 namespace DI\ZendFramework\Service;
 
 use Acclimate\Container\ContainerAcclimator;
+use Acclimate\Container\Exception\InvalidAdapterException;
 use DI\Container;
 use DI\ContainerBuilder;
 use Doctrine\Common\Cache\Cache;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use RuntimeException;
 
 /**
  * Abstract factory responsible of trying to build services from the PHP DI container
@@ -24,7 +31,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 final class DIContainerFactory implements FactoryInterface
 {
-
     use ConfigTrait;
 
     /**
@@ -33,19 +39,27 @@ final class DIContainerFactory implements FactoryInterface
     private $container;
 
     /**
-     * Create service
+     * Create an object
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ContainerInterface $container
+     * @param  string             $requestedName
+     * @param  null|array         $options
      * @return Container
+     * @throws ServiceNotFoundException if unable to resolve the service.
+     * @throws ServiceNotCreatedException if an exception is raised when
+     *     creating a service.
+     * @throws ContainerException if any other error occurs
+     * @throws InvalidAdapterException
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         if ($this->container !== null) {
             return $this->container;
         }
 
         $builder = new ContainerBuilder();
-        $config = $this->getConfig($serviceLocator);
+        $config = $this->getConfig($container);
         $configFile = $this->getDefinitionsFilePath($config);
         $builder->addDefinitions($configFile);
 
@@ -53,13 +67,13 @@ final class DIContainerFactory implements FactoryInterface
         $builder->useAnnotations($useAnnotations);
 
         $acclimator = new ContainerAcclimator();
-        $zfContainer = $acclimator->acclimate($serviceLocator);
+        $zfContainer = $acclimator->acclimate($container);
         $builder->wrapContainer($zfContainer);
 
         /**
          * @var $cache Cache
          */
-        $cache = $this->getCache($serviceLocator, $config);
+        $cache = $this->getCache($container, $config);
 
         if ($cache) {
             $builder->setDefinitionCache($cache);
@@ -76,7 +90,7 @@ final class DIContainerFactory implements FactoryInterface
      * @param array $config
      *
      * @return string
-     * @throws
+     * @throws RuntimeException
      */
     private function getDefinitionsFilePath(array $config)
     {
@@ -87,7 +101,7 @@ final class DIContainerFactory implements FactoryInterface
         }
 
         if (!file_exists($filePath)) {
-            throw new \Exception('DI definitions file missing.');
+            throw new RuntimeException('DI definitions file missing.');
         }
 
         return $filePath;
@@ -111,11 +125,14 @@ final class DIContainerFactory implements FactoryInterface
     /**
      * returns cache adapter, if configured properly
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
      * @param array $config
      * @return Cache|null
+     *
+     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+     * @throws ContainerExceptionInterface Error while retrieving the entry.
      */
-    private function getCache(ServiceLocatorInterface $serviceLocator, array $config)
+    private function getCache(ContainerInterface $container, array $config)
     {
         if (!isset($config['cache'])) {
             return null;
@@ -124,6 +141,6 @@ final class DIContainerFactory implements FactoryInterface
         /**
          * @var $cache Cache
          */
-        return $serviceLocator->get('DiCache');
+        return $container->get('DiCache');
     }
 }

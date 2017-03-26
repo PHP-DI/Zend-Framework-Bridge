@@ -9,10 +9,15 @@
 
 namespace DI\ZendFramework\Service;
 
+use Acclimate\Container\Exception\ContainerException;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\Exception\RuntimeException;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Zend\ServiceManager\Exception\InvalidServiceException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use DI\Container;
 
 /**
  * Abstract factory responsible of trying to build services from the PHP DI container
@@ -20,59 +25,84 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @author Marco Pivetta <ocramius@gmail.com>
  * @author Martin Fris
  */
-class PHPDIAbstractFactory implements AbstractFactoryInterface
+final class PHPDIAbstractFactory implements AbstractFactoryInterface
 {
-    const CONTAINER_NAME = 'DI\\Container';
+    const CONTAINER_NAME = Container::class;
 
     /**
      * lazy loaded instance of the PHP DI container
      *
      * @var ContainerInterface
      */
-    protected $container = null;
+    private $container;
 
     /**
-     * {@inheritDoc}
+     * Can the factory create an instance for the service?
+     *
+     * @param  ContainerInterface $container
+     * @param  string $requestedName
+     * @return bool
+     * @throws \Zend\ServiceManager\Exception\InvalidServiceException
+     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+     * @throws ContainerExceptionInterface Error while retrieving the entry.
+     * @throws ContainerException if any other error occurs
+     * @throws InvalidServiceException
      */
-    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function canCreate(ContainerInterface $container, $requestedName)
     {
         if ($requestedName === self::CONTAINER_NAME) {
             return true;
         }
 
-        return $this->getContainer($serviceLocator)->has($requestedName);
+        return $this->getContainer($container)->has($requestedName);
     }
 
     /**
-     * {@inheritDoc}
+     * Create an object
+     *
+     * @param  ContainerInterface $container
+     * @param  string             $requestedName
+     * @param  null|array         $options
+     * @return ContainerInterface
+     * @throws ServiceNotFoundException if unable to resolve the service.
+     * @throws ServiceNotCreatedException if an exception is raised when
+     *     creating a service.
+     * @throws ContainerException if any other error occurs
+     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+     * @throws ContainerExceptionInterface Error while retrieving the entry.
+     * @throws InvalidServiceException
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return $this->getContainer($serviceLocator)->get($requestedName);
+        return $this->getContainer($container)->get($requestedName);
     }
 
     /**
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ContainerInterface $container
      *
      * @return ContainerInterface
      *
-     * @throws \Zend\ServiceManager\Exception\RuntimeException
+     * @throws \Zend\ServiceManager\Exception\InvalidServiceException
+     * @throws ContainerException
+     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+     * @throws ContainerExceptionInterface Error while retrieving the entry.
      */
-    protected function getContainer(ServiceLocatorInterface $serviceLocator)
+    private function getContainer(ContainerInterface $container)
     {
         if ($this->container !== null) {
             return $this->container;
         }
 
-        $this->container = $serviceLocator->get(static::CONTAINER_NAME);
+        $this->container = $container->get(static::CONTAINER_NAME);
 
         if ($this->container instanceof ContainerInterface) {
             return $this->container;
         }
 
-        throw new RuntimeException(sprintf(
+        throw new InvalidServiceException(sprintf(
             'Container "%s" is not a valid DI\\ContainerInterface, "%s" found',
-            'DI\\Container',
+            Container::class,
             is_object($this->container) ? get_class($this->container) : gettype($this->container)
         ));
     }
