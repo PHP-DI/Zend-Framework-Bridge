@@ -1,8 +1,8 @@
 {
-    "name": "php-di/zf-bridge",
+    "name": "php-di/zend-framework-bridge",
     "type": "library",
     "description": "Integrates PHP-DI to Zend Framework",
-    "homepage": "https://github.com/PHP-DI/ZF-Bridge",
+    "homepage": "https://github.com/PHP-DI/Zend-Framework-Bridge",
     "license": "MIT",
     "require": {
         "php": ">=5.5",
