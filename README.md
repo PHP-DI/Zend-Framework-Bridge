@@ -16,7 +16,7 @@ Require the libraries with Composer:
 {
     "require": {
         "php-di/php-di": "*",
-        "php-di/zf-bridge": "*"
+        "php-di/zend-framework-bridge": "*"
     }
 }
 ```
