@@ -6,8 +6,8 @@
 namespace Test\DI\ZendFramework3\Service;
 
 use DI\Container;
-use DI\ZendFramework3\Service\CacheFactory;
-use DI\ZendFramework3\Service\ConfigException;
+use DI\ZendFramework3\Service\CacheFactory\CacheFactory;
+use DI\ZendFramework3\Service\CacheFactory\ConfigException;
 use DI\ZendFramework3\Service\DIContainerFactory;
 use Doctrine\Common\Cache\ArrayCache;
 use Test\DI\ZendFramework3\Helper\Config;
@@ -19,6 +19,7 @@ use RuntimeException;
  * Class DIContainerFactoryTest
  * @author mfris
  * @package Test\DI\ZendFramework3\Service
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class DIContainerFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,14 +51,14 @@ class DIContainerFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateServiceCacheConfigException()
     {
         $this->serviceManager->setService('config', Config::getMissingCacheAdapterConfig());
-        $this->setExpectedException(ServiceNotCreatedException::class);
+        $this->expectException(ServiceNotCreatedException::class);
         $this->containerFactory->__invoke($this->serviceManager, 'config');
     }
 
     public function testCreateServiceUnsupportedCacheAdapterConfigException()
     {
         $this->serviceManager->setService('config', Config::getUnsupportedCacheAdapterConfig());
-        $this->setExpectedException(ServiceNotCreatedException::class);
+        $this->expectException(ServiceNotCreatedException::class);
         $this->containerFactory->__invoke($this->serviceManager, 'config');
     }
 
@@ -90,7 +91,7 @@ class DIContainerFactoryTest extends \PHPUnit_Framework_TestCase
         /* @var $config array */
         $config = $serviceManager->get('config');
 
-        if (isset($config['phpdi-zf3']) && isset($config['phpdi-zf3']['cache'])) {
+        if (isset($config['phpdi-zf3'], $config['phpdi-zf3']['cache'])) {
             if (!isset($config['phpdi-zf3']['cache']['adapter'])) {
                 throw ConfigException::newCacheAdapterMissingException();
             } elseif ($config['phpdi-zf3']['cache']['adapter'] === 'unsupported') {

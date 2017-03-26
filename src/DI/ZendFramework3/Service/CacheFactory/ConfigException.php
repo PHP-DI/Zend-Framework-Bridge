@@ -2,7 +2,7 @@
 /**
  * @author  mfris
  */
-namespace DI\ZendFramework3\Service;
+namespace DI\ZendFramework3\Service\CacheFactory;
 
 use Exception;
 

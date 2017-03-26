@@ -5,8 +5,8 @@
 
 namespace Test\DI\ZendFramework3\Service;
 
-use DI\ZendFramework3\Service\CacheFactory;
-use DI\ZendFramework3\Service\ConfigException;
+use DI\ZendFramework3\Service\CacheFactory\CacheFactory;
+use DI\ZendFramework3\Service\CacheFactory\ConfigException;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\RedisCache;
 use Zend\ServiceManager\ServiceManager;

@@ -10,9 +10,6 @@ namespace DI\ZendFramework3;
 
 return [
     'controllers' => [
-//        'invokables' => [
-//            Controller\ConsoleController::class => Controller\ConsoleController::class,
-//        ],
         'factories' => [
             Controller\ConsoleController::class => Service\ConsoleControllerFactory::class,
         ]
@@ -25,7 +22,7 @@ return [
 
         'factories' => [
             'ControllerManager' => Service\ControllerManagerFactory::class,
-            'DiCache' => Service\CacheFactory::class,
+            'DiCache' => Service\CacheFactory\CacheFactory::class,
         ],
     ],
 
