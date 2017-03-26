@@ -6,7 +6,7 @@
  * @copyright Matthieu Napoli (http://mnapoli.fr/)
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
-namespace DI\ZendFramework2;
+namespace DI\ZendFramework;
 
 // compatibility with zend > 2.5
 $controllerType = 'ControllerLoader';
@@ -20,7 +20,7 @@ if (class_exists('\Zend\Version\Version')) {
 return [
     'controllers' => [
         'invokables' => [
-            'DI\\ZendFramework2\\Controller\\Console' => 'DI\\ZendFramework2\\Controller\\ConsoleController',
+            'DI\\ZendFramework\\Controller\\Console' => 'DI\\ZendFramework\\Controller\\ConsoleController',
         ],
     ],
 
@@ -52,7 +52,7 @@ return [
         ],
     ],
 
-    'phpdi-zf2' => [
+    'phpdi-zf' => [
         'useAnntotations' => false,
     ],
 ];

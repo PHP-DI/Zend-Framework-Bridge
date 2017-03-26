@@ -1,7 +1,7 @@
 <?php
 return array(
     'modules' => array(
-        'DI\ZendFramework2',
+        'DI\ZendFramework',
         //'ZendDeveloperTools',
         'Application',
     ),
@@ -17,7 +17,7 @@ return array(
     'service_manager' => array(
         // ...
         'factories' => array(
-            'DI\Container' => 'DI\ZendFramework2\\Service\\DIContainerFactory',
+            'DI\Container' => 'DI\\ZendFramework\\Service\\DIContainerFactory',
         ),
     ),
 );

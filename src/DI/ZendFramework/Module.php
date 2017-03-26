@@ -7,14 +7,14 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
 
-namespace DI\ZendFramework2;
+namespace DI\ZendFramework;
 
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 
 /**
- * Module that provides PHP-DI integration with ZF2
+ * Module that provides PHP-DI integration with ZF
  *
  * @author Marco Pivetta <ocramius@gmail.com>
  */

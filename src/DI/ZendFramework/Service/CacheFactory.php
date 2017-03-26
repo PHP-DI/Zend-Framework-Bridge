@@ -3,7 +3,7 @@
  * @author     mfris
  */
 
-namespace DI\ZendFramework2\Service;
+namespace DI\ZendFramework\Service;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\CacheProvider;
@@ -18,7 +18,7 @@ use Redis;
  * Factory for php di definitions cache
  *
  * @author  mfris
- * @package \DI\ZendFramework2\Service\Cache
+ * @package \DI\ZendFramework\Service\Cache
  */
 class CacheFactory implements FactoryInterface
 {

@@ -3,7 +3,7 @@
  * @author     mfris
  */
 
-namespace DI\ZendFramework2\Controller;
+namespace DI\ZendFramework\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Doctrine\Common\Cache\FlushableCache;
@@ -12,7 +12,7 @@ use Doctrine\Common\Cache\FlushableCache;
  * Cotroller for handling of the console commands
  *
  * @author mfris
- * @package \DI\ZendFramework2\Controller
+ * @package \DI\ZendFramework\Controller
  */
 class ConsoleController extends AbstractActionController
 {

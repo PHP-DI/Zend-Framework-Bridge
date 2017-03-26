@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
 
-namespace DI\ZendFramework2\Service;
+namespace DI\ZendFramework\Service;
 
 use Acclimate\Container\ContainerAcclimator;
 use DI\Container;

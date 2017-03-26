@@ -3,7 +3,7 @@
  * @author  mfris
  */
 
-namespace Test\DI\ZendFramework2\Helper;
+namespace Test\DI\ZendFramework\Helper;
 
 /**
  * Class Config
@@ -18,7 +18,7 @@ class Config
     public static function getWorkingConfig()
     {
         return [
-            'phpdi-zf2' => [
+            'phpdi-zf' => [
                 'definitionsFile' => realpath(__DIR__ . '/php-di.config.php'),
                 'useAnntotations' => true,
                 'cache' => [
@@ -35,7 +35,7 @@ class Config
     public static function getMissingCacheAdapterConfig()
     {
         return [
-            'phpdi-zf2' => [
+            'phpdi-zf' => [
                 'definitionsFile' => realpath(__DIR__ . '/php-di.config.php'),
                 'useAnntotations' => true,
                 'cache' => [
@@ -51,7 +51,7 @@ class Config
     public static function getUnsupportedCacheAdapterConfig()
     {
         return [
-            'phpdi-zf2' => [
+            'phpdi-zf' => [
                 'definitionsFile' => realpath(__DIR__ . '/php-di.config.php'),
                 'useAnntotations' => true,
                 'cache' => [

@@ -7,11 +7,11 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
 
-namespace Test\DI\ZendFramework2\Service;
+namespace Test\DI\ZendFramework;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use DI\ZendFramework2\Service\PHPDIAbstractFactory;
+use DI\ZendFramework\Service\PHPDIAbstractFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 
@@ -36,7 +36,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
         $config = array(
             'modules' => array(
-                'DI\ZendFramework2',
+                'DI\ZendFramework',
             ),
             'module_listener_options' => array(),
         );

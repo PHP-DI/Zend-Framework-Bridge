@@ -5,14 +5,14 @@
  * @license    Internal use only
  */
 
-namespace DI\ZendFramework2\Service;
+namespace DI\ZendFramework\Service;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * simple trait for getting php di config data from zf2 config array
+ * simple trait for getting php di config data from zf config array
  * @author  mfris
- * @package DI\ZendFramework2\Service
+ * @package DI\ZendFramework\Service
  */
 trait ConfigTrait
 {
@@ -26,8 +26,8 @@ trait ConfigTrait
     {
         /* @var $config array */
         $config = $serviceLocator->get('config');
-        if (isset($config['phpdi-zf2'])) {
-            $config = $config['phpdi-zf2'];
+        if (isset($config['phpdi-zf'])) {
+            $config = $config['phpdi-zf'];
         } else {
             $config = [];
         }

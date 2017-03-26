@@ -16,7 +16,7 @@
  * most users, however, feel free to configure autoloading however you'd like.
  */
 
-$dir = getcwd(); // php-di zf2 quickstart hack
+$dir = getcwd(); // php-di zf quickstart hack
 chdir("../");
 
 // Composer autoloading
@@ -39,7 +39,7 @@ if (($zf2Path = getenv('ZF2_PATH') ?: (is_dir('vendor/ZF2/library') ? 'vendor/ZF
 }
 
 if (!class_exists('Zend\Loader\AutoloaderFactory')) {
-    throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
+    throw new RuntimeException('Unable to load ZF. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
 }
 
-chdir($dir); // php-di zf2 quickstart hack end
+chdir($dir); // php-di zf quickstart hack end

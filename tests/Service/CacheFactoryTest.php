@@ -3,10 +3,10 @@
  * @author  mfris
  */
 
-namespace Test\DI\ZendFramework2\Service;
+namespace Test\DI\ZendFramework\Service;
 
-use DI\ZendFramework2\Service\CacheFactory;
-use DI\ZendFramework2\Service\ConfigException;
+use DI\ZendFramework\Service\CacheFactory;
+use DI\ZendFramework\Service\ConfigException;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\RedisCache;
 use Zend\ServiceManager\ServiceManager;
@@ -14,7 +14,7 @@ use Zend\ServiceManager\ServiceManager;
 /**
  * Class CacheFactoryTest
  * @author mfris
- * @package Test\DI\ZendFramework2\Service
+ * @package Test\DI\ZendFramework\Service
  */
 class CacheFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -38,7 +38,7 @@ class CacheFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateRedisCache()
     {
         $this->serviceManager->setService('config', [
-            'phpdi-zf2' => [
+            'phpdi-zf' => [
                 'cache' => [
                     'namespace' => 'quickstart',
                     // redis adapter
@@ -56,7 +56,7 @@ class CacheFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFileSystemCache()
     {
         $this->serviceManager->setService('config', [
-            'phpdi-zf2' => [
+            'phpdi-zf' => [
                 'cache' => [
                     'namespace' => 'quickstart',
                     'adapter' => 'filesystem',
@@ -71,7 +71,7 @@ class CacheFactoryTest extends \PHPUnit_Framework_TestCase
     public function testInvalidCacheConfigWithoutAdapter()
     {
         $this->serviceManager->setService('config', [
-            'phpdi-zf2' => [
+            'phpdi-zf' => [
                 'cache' => [
                 ],
             ],
@@ -84,7 +84,7 @@ class CacheFactoryTest extends \PHPUnit_Framework_TestCase
     public function testInvalidCacheConfigNonExistentAdapter()
     {
         $this->serviceManager->setService('config', [
-            'phpdi-zf2' => [
+            'phpdi-zf' => [
                 'cache' => [
                     'adapter' => 'non-existent',
                 ],
